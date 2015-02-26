@@ -1,24 +1,39 @@
 class PostsController < ApplicationController
   before_action :find_post, only: [:show, :update, :edit, :destroy]
   def index
+    @posts = Post.all.order('created_at DESC')
   end
 
   def show
   end
 
   def new
+    @post = Post.new
   end
 
   def create
+    @post = Post.new(post_params)
+    if @post.save
+      redirect_to @post
+    else
+      render 'New'
+    end
   end
 
   def edit
-  end
+   end
 
   def update
+    if @post.update(post_params)
+      redirect_to @post
+    else
+      render 'Edit'
+    end
   end
 
   def destroy
+    @post.destroy
+    redirect_to posts_path
   end
 
   private
@@ -28,6 +43,6 @@ class PostsController < ApplicationController
   end
 
   def find_post
-    @post = Post.find(params[:id])
+    @post = Post.find(params[:id]) 
   end
 end
