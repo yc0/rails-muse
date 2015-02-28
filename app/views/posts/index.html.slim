@@ -1,9 +1,30 @@
-- @posts.each do |post|
-  =link_to (image_tag post.image.small.url), post
-  h2=link_to post.title, post
-  p #{pluralize(post.comments.count,'Comment')} 
-  p #{pluralize(post.get_upvotes.size,'Like')} 
-  / p= time_ago_in_words(post.created_at)
+- if user_signed_in?
+  p#intro
+    | Hello #{current_user.name}
+    br
+    span Share your inspiration and see what's inspiring others
+- else 
+  p#intro 
+    | What's your muse ?
+    br
+    spn Share your inspiration and see what's inspiring others
 
-= link_to 'Add a new inspiration', new_post_path
+#posts
+  - @posts.each do |post|
+    .post
+      .post_image
+        =link_to (image_tag post.image.small.url), post
+      .post_content
+        h2=link_to post.title, post
+        .data.clearfix
+          p.username 
+            | Share by #{post.user.name}
+          p.buttons
+            | 
+            span 
+              i.fa.fa-comments-o=post.comments.count
+            span
+              i.fa.fa-thumbs-o-up=post.get_upvotes.size
+
+       
 
