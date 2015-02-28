@@ -21,6 +21,26 @@
       - if user_signed_in?
         = link_to 'Edit', edit_post_path(@post), class: 'data'
         = link_to 'Delete', @post, method: :delete,  class: 'data', data: {confirm: 'Are you sure ?'} 
+    
+    #random_post
+      h3 Random Inspiration
+      .post
+        .post_image
+          = link_to (image_tag @random_post.image.small.url), @random_post
+
+        .post_content
+          .title
+            h2=link_to @random_post.title, @random_post
+          .data.clearfix
+            p.username
+              | Share by #{@random_post.user.name}
+            p.buttons
+              |  
+              span 
+                i.fa.fa-comments-o=@random_post.comments.count
+              span
+                i.fa.fa-thumbs-o-up=@random_post.get_upvotes.size
+
 
 #comments
   h2.comment_count = pluralize(@post.comments.count, 'Comment')

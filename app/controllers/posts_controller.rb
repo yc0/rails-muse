@@ -7,10 +7,12 @@ class PostsController < ApplicationController
 
   def show
     @comments = Comment.where(post_id: @post)
+    @random_post = Post.where.not(id: @post).order('RANDOM()').first
   end
 
   def new
     @post = current_user.posts.build
+
   end
 
   def create
