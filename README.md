@@ -1,7 +1,6 @@
- Muse
- =======
+Muse
+=======
 
- ---
  This applicatoin was inspired from Mackenziechild 12 in 12 challenge
  I followed his video learning rails.
 
